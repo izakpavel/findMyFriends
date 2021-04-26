@@ -25,6 +25,9 @@ class InputView: UIView {
 
     func commonInit() {
         self.backgroundColor = UIColor.systemBackground
+        self.layer.shadowColor = UIColor.secondaryLabel.cgColor
+        self.layer.shadowOpacity = 0.3
+        self.layer.shadowOffset = CGSize()
         
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing

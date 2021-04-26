@@ -16,6 +16,10 @@ class MainView: UIView {
     weak var displayToggle: UISwitch?
     weak var countView: InputView?
     
+    private var inputConstraintWidth: NSLayoutConstraint?
+    private var inputConstraintTrailing: NSLayoutConstraint?
+    private var inputConstraintBottom: NSLayoutConstraint?
+    
     var showTable: Bool = false {
         didSet { self.userTable?.setVisibilityAnimated(self.showTable) }
     }
@@ -28,6 +32,31 @@ class MainView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         self.commonInit()
+    }
+    
+    enum InputPosition {
+        case expanded (CGFloat)
+        case small
+    }
+    
+    var inputPosition: InputPosition = .small {
+        didSet {
+            switch self.inputPosition {
+            case .small:
+                self.inputConstraintWidth?.constant = 44
+                self.inputConstraintBottom?.constant = -16
+                self.inputConstraintTrailing?.constant = -16
+                self.countView?.titleLabel?.isHidden = true
+                self.countView?.layer.cornerRadius = 22
+                
+            case .expanded(let bottomOffset):
+                self.inputConstraintWidth?.constant = self.superview?.bounds.width ?? 0
+                self.inputConstraintBottom?.constant = -bottomOffset
+                self.inputConstraintTrailing?.constant = 0
+                self.countView?.titleLabel?.isHidden = false
+                self.countView?.layer.cornerRadius = 0
+            }
+        }
     }
         
     func commonInit() {
@@ -61,18 +90,28 @@ class MainView: UIView {
         displayToggle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
         displayToggle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding).isActive = true
         
-        countView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
-        countView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
-        
         displayToggle.heightAnchor.constraint(equalToConstant: 44).isActive = true
         countView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
         
         // will remove
         displayToggle.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        //countView.widthAnchor.constraint(equalToConstant: 144).isActive = true
+        
+        let inputConstraintTrailing = countView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding)
+        self.inputConstraintTrailing = inputConstraintTrailing
+        
+        let inputConstraintBottom = countView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding)
+        self.inputConstraintBottom = inputConstraintBottom
+        
+        let inputConstraintWidth = countView.widthAnchor.constraint(greaterThanOrEqualToConstant: 44)
+        self.inputConstraintWidth = inputConstraintWidth
+        
+        self.addConstraints([inputConstraintTrailing, inputConstraintBottom, inputConstraintWidth])
+        
         
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_ :)))
         self.addGestureRecognizer(tapRecognizer)
+        
+        self.inputPosition = .small
     }
     
     @objc private func handleTap(_ sender: UITapGestureRecognizer) {

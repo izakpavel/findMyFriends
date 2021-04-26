@@ -17,6 +17,8 @@ class ViewController: UIViewController {
         return self.view as? MainView
     }
     
+    // MARK: Life cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -33,9 +35,53 @@ class ViewController: UIViewController {
         viewModel.load()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.keyboardNotifications(shouldRegister: true)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.keyboardNotifications(shouldRegister: false)
+    }
+    
     func setupBindings() {
         if let inputTextfield = self.mainView?.countView?.inputTextfield {
             self.viewModel.$requestUserCount.assign(to: \.text!, on: inputTextfield).store(in: &subscriptions)
+        }
+    }
+    
+    // MARK: handling keyboard
+    
+    func keyboardNotifications(shouldRegister:Bool){
+        if shouldRegister {
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { (notification) in
+                self.handleKeyboardNotification(notification: notification)
+            }
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { (notification) in
+                self.handleKeyboardNotification(notification: notification)
+            }
+        } else {
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        }
+    }
+    
+    func handleKeyboardNotification(notification: Notification) {
+        guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
+            
+        let showNotification = notification.name == UIResponder.keyboardWillShowNotification ? true : false
+        if (showNotification) {
+            UIView.animate(withDuration: 0.3) {
+                self.mainView?.inputPosition = .expanded(keyboardRect.height)
+                self.mainView?.layoutIfNeeded()
+            }
+        }
+        else {
+            UIView.animate(withDuration: 0.3) {
+                self.mainView?.inputPosition = .small
+                self.mainView?.layoutIfNeeded()
+            }
         }
     }
 }
