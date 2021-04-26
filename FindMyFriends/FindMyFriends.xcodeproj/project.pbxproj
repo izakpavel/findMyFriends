@@ -19,6 +19,7 @@
 		8B8B24CD2632FD2C00951732 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24CC2632FD2C00951732 /* MainView.swift */; };
 		8B8B24D02632FFD200951732 /* helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24CF2632FFD200951732 /* helpers.swift */; };
 		8BC02DC326374820006ABF99 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02DC226374820006ABF99 /* InputView.swift */; };
+		8BC02DCB26376E99006ABF99 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02DCA26376E99006ABF99 /* UserAnnotation.swift */; };
 		DE61ABDBC1F6160DE7398EB7 /* Pods_FindMyFriends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3001555B9342BB8546C566EC /* Pods_FindMyFriends.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +41,7 @@
 		8B8B24CC2632FD2C00951732 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8B8B24CF2632FFD200951732 /* helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helpers.swift; sourceTree = "<group>"; };
 		8BC02DC226374820006ABF99 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
+		8BC02DCA26376E99006ABF99 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +106,7 @@
 				8B8B24C02632F0CD00951732 /* User.swift */,
 				8B8B24C62632F60000951732 /* Networking.swift */,
 				8B8B24C92632FBEC00951732 /* MainViewModel.swift */,
+				8BC02DCA26376E99006ABF99 /* UserAnnotation.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -246,6 +249,7 @@
 				8B8B24AC2632EF8B00951732 /* ViewController.swift in Sources */,
 				8B8B24A82632EF8B00951732 /* AppDelegate.swift in Sources */,
 				8BC02DC326374820006ABF99 /* InputView.swift in Sources */,
+				8BC02DCB26376E99006ABF99 /* UserAnnotation.swift in Sources */,
 				8B8B24AA2632EF8B00951732 /* SceneDelegate.swift in Sources */,
 				8B8B24CA2632FBEC00951732 /* MainViewModel.swift in Sources */,
 			);

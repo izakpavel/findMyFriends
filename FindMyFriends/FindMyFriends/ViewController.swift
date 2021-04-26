@@ -8,12 +8,21 @@
 import UIKit
 import Combine
 import Nuke
+import Mapbox
 
 class ViewController: UIViewController, ActivityPresentable {
 
     let viewModel = MainViewModel()
     private var subscriptions = Set<AnyCancellable>()
     private var users: [User] = []
+    private var annotations: [UserAnnotation] = [] {
+        didSet {
+            if let annotations = self.mainView?.mapView?.annotations {
+                self.mainView?.mapView?.removeAnnotations(annotations)
+            }
+            self.mainView?.mapView?.addAnnotations(self.annotations)
+        }
+    }
         
     var mainView: MainView? {
         return self.view as? MainView
@@ -56,6 +65,7 @@ class ViewController: UIViewController, ActivityPresentable {
                 .sink { [weak self] users in
                     self?.users = users
                     self?.mainView?.userTable?.reloadData()
+                    self?.annotations = users.map{ user in UserAnnotation(user: user) }
                 }
                 .store(in: &subscriptions)
         
@@ -130,5 +140,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
+}
+
+extension ViewController: MGLMapViewDelegate {
 }
 
