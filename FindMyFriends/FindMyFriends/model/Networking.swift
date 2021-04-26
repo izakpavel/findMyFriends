@@ -40,7 +40,6 @@ struct ApiSession: APISessionProviding {
         return URLSession.shared.dataTaskPublisher(for: requestProvider.urlRequest)
             .map { print(String(decoding: $0.data, as: UTF8.self)); return $0.data }
             .decode(type: T.self, decoder: JSONDecoder())
-            //.map { $0.data! }
             .eraseToAnyPublisher()
     }
 }
@@ -54,7 +53,9 @@ struct RandomUsersProvider {
                     print("Failed with error: \(error)")
                     return Just(RandomUserResponse())
                 }
-                .map{ return $0.users ?? [] }
+                .map {
+                    return $0.results ?? []
+                }
                 
             .eraseToAnyPublisher()
     }

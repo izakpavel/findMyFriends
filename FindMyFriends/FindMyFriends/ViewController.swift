@@ -7,11 +7,13 @@
 
 import UIKit
 import Combine
+import Nuke
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ActivityPresentable {
 
     let viewModel = MainViewModel()
     private var subscriptions = Set<AnyCancellable>()
+    private var users: [User] = []
         
     var mainView: MainView? {
         return self.view as? MainView
@@ -49,6 +51,19 @@ class ViewController: UIViewController {
         if let inputTextfield = self.mainView?.countView?.inputTextfield {
             self.viewModel.$requestUserCount.assign(to: \.text!, on: inputTextfield).store(in: &subscriptions)
         }
+        
+        viewModel.$users
+                .sink { [weak self] users in
+                    self?.users = users
+                    self?.mainView?.userTable?.reloadData()
+                }
+                .store(in: &subscriptions)
+        
+        viewModel.$isLoading
+                .sink { [weak self] isLoading in
+                    self?.setActivityIndicatorState(visible: isLoading)
+                }
+                .store(in: &subscriptions)
     }
     
     // MARK: handling keyboard
@@ -88,11 +103,32 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return self.users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell") ??  UITableViewCell(style: .subtitle, reuseIdentifier: "UserCell")
+        
+        let user = self.users[indexPath.row]
+        
+        cell.textLabel?.text = user.name?.fullName
+        cell.detailTextLabel?.text = user.login?.username
+        cell.detailTextLabel?.textColor = UIColor.secondaryLabel
+        cell.imageView?.layer.cornerRadius = 21
+        cell.imageView?.layer.masksToBounds = true
+        cell.accessoryType = .disclosureIndicator
+        
+        
+        if let url = URL(string: user.picture?.large ?? ""), let imageView = cell.imageView {
+            let options = ImageLoadingOptions(
+              placeholder: UIImage(named: "placeholder"),
+              transition: .fadeIn(duration: 0.3)
+            )
+            
+            Nuke.loadImage(with: url, options: options, into: imageView)
+        }
+        
+        return cell
     }
 }
 

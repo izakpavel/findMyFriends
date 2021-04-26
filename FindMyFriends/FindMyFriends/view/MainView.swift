@@ -67,6 +67,7 @@ class MainView: UIView {
         
         let userTable = UITableView(frame: CGRect(), style: .plain)
         userTable.backgroundColor = UIColor.orange
+        userTable.tableFooterView = UIView()
         self.userTable = userTable
         
         let displayToggle = UISwitch()

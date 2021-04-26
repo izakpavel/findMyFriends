@@ -10,6 +10,8 @@
 import Foundation
 import UIKit
 
+// MARK: autolayout support
+
 extension UIView {
 
     func pinToSuperviewConstraints(insets: UIEdgeInsets = UIEdgeInsets()) -> [NSLayoutConstraint] {
@@ -40,6 +42,7 @@ extension UIView {
     }
 }
 
+// MARK: handling actions with callbacks
 
 /// helper  object that helds reference to a closure, nothing more
 @objc class ClosureSleeve: NSObject {
@@ -72,3 +75,55 @@ extension UIControl {
         self.closureSleeve = closureSleeve
     }
 }
+
+// MARK: ActivityPresentable
+
+/// protocol to bring loading indicator in the main viewcontroller view
+protocol ActivityPresentable {
+    /// trigger indicator state
+    func setActivityIndicatorState(visible: Bool, moveY: CGFloat)
+}
+
+extension ActivityPresentable {
+    func setActivityIndicatorState(visible: Bool, moveY: CGFloat = 0.0) {
+        return setActivityIndicatorState(visible: visible, moveY: moveY)
+    }
+}
+
+extension ActivityPresentable where Self: UIViewController {
+    
+    func setActivityIndicatorState(visible: Bool, moveY: CGFloat = 0.0) {
+        if visible {
+            self.presentActivityIndicator(moveY: moveY)
+        }
+        else {
+            self.dismissActivityIndicator()
+        }
+    }
+    
+    func presentActivityIndicator(moveY: CGFloat = 0.0) {
+        if let activityIndicator = findActivityIndicator() {
+            activityIndicator.startAnimating()
+        } else {
+            let activityIndicator = UIActivityIndicatorView(style: .large)
+            
+            activityIndicator.startAnimating()
+            view.addSubview(activityIndicator)
+
+            activityIndicator.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+                activityIndicator.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor),
+                activityIndicator.centerYAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor, constant: moveY)
+                ])
+        }
+    }
+
+    func dismissActivityIndicator() {
+        findActivityIndicator()?.stopAnimating()
+    }
+
+    func findActivityIndicator() -> UIActivityIndicatorView? {
+        return view.subviews.compactMap { $0 as? UIActivityIndicatorView }.first
+    }
+}
+

@@ -9,11 +9,11 @@ import Foundation
 
 
 public struct RandomUserResponse: Codable {
-    let users: [User]?
+    let results: [User]?
     let info: ResponseInfo?
     
     init() {
-        self.users = []
+        self.results = []
         self.info = nil
     }
 }
@@ -40,8 +40,15 @@ enum Gender: String, Codable {
     case male
 }
 
+struct Street: Codable {
+    let number: Int?
+    let name: String?
+}
+
 struct Location: Codable {
-    let street, city, state, postcode: String?
+    let street: Street?
+    let city, state: String?
+    //let postcode: Int? or String? API issue
     let coordinates: Coordinates?
     let timezone: Timezone?
 }
@@ -90,18 +97,12 @@ struct Login: Codable {
 }
 
 struct UserName: Codable {
-    let title: Title?
+    let title: String?
     let first, last: String?
-}
-
-enum Title: String, Codable {
-    case madame
-    case mademoiselle
-    case miss
-    case monsieur
-    case mr
-    case mrs
-    case ms
+    
+    var fullName: String? {
+        [first, last].compactMap { $0 }.joined(separator: " ")
+    }
 }
 
 struct Picture: Codable {
