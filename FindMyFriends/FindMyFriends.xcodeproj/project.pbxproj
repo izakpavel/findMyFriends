@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -18,9 +18,14 @@
 		8B8B24CA2632FBEC00951732 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24C92632FBEC00951732 /* MainViewModel.swift */; };
 		8B8B24CD2632FD2C00951732 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24CC2632FD2C00951732 /* MainView.swift */; };
 		8B8B24D02632FFD200951732 /* helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24CF2632FFD200951732 /* helpers.swift */; };
+		8BC02DC326374820006ABF99 /* InputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC02DC226374820006ABF99 /* InputView.swift */; };
+		DE61ABDBC1F6160DE7398EB7 /* Pods_FindMyFriends.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3001555B9342BB8546C566EC /* Pods_FindMyFriends.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		028642BC5B93B6821007072F /* Pods-FindMyFriends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMyFriends.debug.xcconfig"; path = "Target Support Files/Pods-FindMyFriends/Pods-FindMyFriends.debug.xcconfig"; sourceTree = "<group>"; };
+		1CD0CE0676978DAA0AD05F89 /* Pods-FindMyFriends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMyFriends.release.xcconfig"; path = "Target Support Files/Pods-FindMyFriends/Pods-FindMyFriends.release.xcconfig"; sourceTree = "<group>"; };
+		3001555B9342BB8546C566EC /* Pods_FindMyFriends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindMyFriends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8B24A42632EF8B00951732 /* FindMyFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindMyFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8B24A72632EF8B00951732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B8B24A92632EF8B00951732 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +39,7 @@
 		8B8B24C92632FBEC00951732 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		8B8B24CC2632FD2C00951732 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8B8B24CF2632FFD200951732 /* helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = helpers.swift; sourceTree = "<group>"; };
+		8BC02DC226374820006ABF99 /* InputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,17 +47,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE61ABDBC1F6160DE7398EB7 /* Pods_FindMyFriends.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		76624D71534E9EE756F2028D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				028642BC5B93B6821007072F /* Pods-FindMyFriends.debug.xcconfig */,
+				1CD0CE0676978DAA0AD05F89 /* Pods-FindMyFriends.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		8B8B249B2632EF8B00951732 = {
 			isa = PBXGroup;
 			children = (
 				8B8B24A62632EF8B00951732 /* FindMyFriends */,
 				8B8B24A52632EF8B00951732 /* Products */,
+				76624D71534E9EE756F2028D /* Pods */,
+				F6F26CEF532D732CDE8BB5A5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -94,8 +112,17 @@
 			isa = PBXGroup;
 			children = (
 				8B8B24CC2632FD2C00951732 /* MainView.swift */,
+				8BC02DC226374820006ABF99 /* InputView.swift */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		F6F26CEF532D732CDE8BB5A5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3001555B9342BB8546C566EC /* Pods_FindMyFriends.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -105,9 +132,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8B8B24B82632EF8D00951732 /* Build configuration list for PBXNativeTarget "FindMyFriends" */;
 			buildPhases = (
+				0F8CE3DFC2E4DB403D7B4830 /* [CP] Check Pods Manifest.lock */,
 				8B8B24A02632EF8B00951732 /* Sources */,
 				8B8B24A12632EF8B00951732 /* Frameworks */,
 				8B8B24A22632EF8B00951732 /* Resources */,
+				D83FE1ACC05B27974BB81FD3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -163,6 +192,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0F8CE3DFC2E4DB403D7B4830 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FindMyFriends-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D83FE1ACC05B27974BB81FD3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FindMyFriends/Pods-FindMyFriends-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FindMyFriends/Pods-FindMyFriends-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FindMyFriends/Pods-FindMyFriends-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8B8B24A02632EF8B00951732 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -174,6 +245,7 @@
 				8B8B24D02632FFD200951732 /* helpers.swift in Sources */,
 				8B8B24AC2632EF8B00951732 /* ViewController.swift in Sources */,
 				8B8B24A82632EF8B00951732 /* AppDelegate.swift in Sources */,
+				8BC02DC326374820006ABF99 /* InputView.swift in Sources */,
 				8B8B24AA2632EF8B00951732 /* SceneDelegate.swift in Sources */,
 				8B8B24CA2632FBEC00951732 /* MainViewModel.swift in Sources */,
 			);
@@ -319,6 +391,7 @@
 		};
 		8B8B24B92632EF8D00951732 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 028642BC5B93B6821007072F /* Pods-FindMyFriends.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -338,6 +411,7 @@
 		};
 		8B8B24BA2632EF8D00951732 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1CD0CE0676978DAA0AD05F89 /* Pods-FindMyFriends.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

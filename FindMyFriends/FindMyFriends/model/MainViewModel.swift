@@ -11,7 +11,7 @@ import Combine
 class MainViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var users: [User] = []
-    @Published var requestUserCount: Int = 5
+    @Published var requestUserCount: String = "5"
     @Published var showList: Bool = false
     
     private var cancellable: AnyCancellable?
@@ -22,7 +22,7 @@ class MainViewModel: ObservableObject {
         
         self.isLoading = true
         
-        self.cancellable = provider.getUsers(count: self.requestUserCount)
+        self.cancellable = provider.getUsers(count: Int(self.requestUserCount) ?? 5)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { items in
                 self.users = items

@@ -7,13 +7,14 @@
 
 import Foundation
 import UIKit
+import Mapbox
 
 
 class MainView: UIView {
     weak var userTable: UITableView?
-    weak var mapView: UIView?
+    weak var mapView: MGLMapView?
     weak var displayToggle: UISwitch?
-    weak var inputTextfield: UITextField?
+    weak var countView: InputView?
     
     var showTable: Bool = false {
         didSet { self.userTable?.setVisibilityAnimated(self.showTable) }
@@ -31,7 +32,7 @@ class MainView: UIView {
         
     func commonInit() {
         
-        let mapView = UIView()
+        let mapView = MGLMapView()
         mapView.backgroundColor = UIColor.blue
         self.mapView = mapView
         
@@ -42,12 +43,12 @@ class MainView: UIView {
         let displayToggle = UISwitch()
         self.displayToggle = displayToggle
         
-        let inputTextfield = UITextField()
-        self.inputTextfield = inputTextfield
+        let countView = InputView()
+        self.countView = countView
         
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        [mapView, userTable, displayToggle, inputTextfield].forEach{
+        [mapView, userTable, displayToggle, countView].forEach{
             self.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -60,14 +61,23 @@ class MainView: UIView {
         displayToggle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
         displayToggle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding).isActive = true
         
-        inputTextfield.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
-        inputTextfield.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
+        countView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
+        countView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
         
         displayToggle.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        inputTextfield.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        countView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
         
         // will remove
         displayToggle.widthAnchor.constraint(equalToConstant: 44).isActive = true
-        inputTextfield.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        //countView.widthAnchor.constraint(equalToConstant: 144).isActive = true
+        
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_ :)))
+        self.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc private func handleTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            endEditing(true)
+        }
     }
 }
