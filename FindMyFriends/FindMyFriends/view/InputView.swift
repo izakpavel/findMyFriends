@@ -13,6 +13,7 @@ class InputView: UIView {
     weak var titleLabel: UILabel?
     weak var inputTextfield: UITextField?
     
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.commonInit()
@@ -53,6 +54,8 @@ class InputView: UIView {
         inputTextfield.keyboardType = .decimalPad
         inputTextfield.textAlignment = .center
         self.inputTextfield = inputTextfield
+        
+        
         
         [titleLabel, inputTextfield].forEach{
             stackView.addArrangedSubview($0)

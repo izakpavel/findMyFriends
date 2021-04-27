@@ -182,7 +182,7 @@ extension ViewController: BottomSheetPresenter {
         userDetailView.setUser(user)
         controller.contentView = userDetailView
         
-        controller.sheetSizingStyle = .adaptive//.fixed(height: 300)
+        controller.sheetSizingStyle = .adaptive
         controller.handleStyle = .inside
         controller.handleColor = Appearance.highlightColor
         controller.contentInsets = UIEdgeInsets(top: Appearance.padding, left: 0, bottom: Appearance.padding, right: 0)

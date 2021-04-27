@@ -19,6 +19,8 @@ class MainView: UIView {
     weak var mapView: MGLMapView?
     weak var displayToggle: ToggleView?
     weak var countView: InputView?
+    weak var confirmButton: UIButton?
+    weak var overlayView: UIView?
     
     private var inputConstraintWidth: NSLayoutConstraint?
     private var inputConstraintTrailing: NSLayoutConstraint?
@@ -51,6 +53,8 @@ class MainView: UIView {
                 self.inputConstraintTrailing?.constant = -Appearance.padding
                 self.countView?.titleLabel?.isHidden = true
                 self.countView?.titleLabel?.alpha = 0
+                self.confirmButton?.alpha = 0
+                self.overlayView?.alpha = 0
                 
             case .expanded(let bottomOffset):
                 self.inputConstraintWidth?.constant = self.superview?.bounds.width ?? 0
@@ -58,6 +62,8 @@ class MainView: UIView {
                 self.inputConstraintTrailing?.constant = 0
                 self.countView?.titleLabel?.isHidden = false
                 self.countView?.titleLabel?.alpha = 1
+                self.confirmButton?.alpha = 1
+                self.overlayView?.alpha = 1
             }
         }
     }
@@ -66,6 +72,13 @@ class MainView: UIView {
         
         let mapView = MGLMapView()
         self.mapView = mapView
+        
+        let overlayView = UIView()
+        overlayView.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_ :)))
+        overlayView.addGestureRecognizer(tapRecognizer)
+
+        self.overlayView = overlayView
         
         let userTable = UITableView(frame: CGRect(), style: .plain)
         userTable.tableFooterView = UIView()
@@ -78,15 +91,27 @@ class MainView: UIView {
         let countView = InputView()
         self.countView = countView
         
+        let confirmButton = UIButton()
+        confirmButton.setImage(UIImage(systemName: "checkmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold))?.withRenderingMode(.alwaysTemplate), for: .normal)
+        confirmButton.imageView?.tintColor = UIColor.white
+        confirmButton.layer.cornerRadius = 22
+        confirmButton.layer.masksToBounds = true
+        confirmButton.backgroundColor = Appearance.accentColor
+        confirmButton.setAction {
+            self.endEditing(true)
+        }
+        self.confirmButton = confirmButton
+        
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        [mapView, userTable, displayToggle, countView].forEach{
+        [mapView, userTable, overlayView, displayToggle, countView, confirmButton].forEach{
             self.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
         self.addConstraints(userTable.pinToSuperviewConstraints())
         self.addConstraints(mapView.pinToSuperviewConstraints())
+        self.addConstraints(overlayView.pinToSuperviewConstraints())
         
         let padding:CGFloat = Appearance.padding
         
@@ -106,9 +131,10 @@ class MainView: UIView {
         
         self.addConstraints([inputConstraintTrailing, inputConstraintBottom, inputConstraintWidth])
         
-        
-        //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_ :)))
-        //self.addGestureRecognizer(tapRecognizer)
+        confirmButton.bottomAnchor.constraint(equalTo: countView.topAnchor, constant: -padding).isActive = true
+        confirmButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
+        confirmButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        confirmButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         self.inputPosition = .small
         self.showTable = false
