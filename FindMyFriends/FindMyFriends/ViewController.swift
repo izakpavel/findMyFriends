@@ -44,6 +44,8 @@ class ViewController: UIViewController, ActivityPresentable {
         self.mainView?.userTable?.registerCell(GenericViewCell<UserRowView>.self)
         self.mainView?.userTable?.separatorStyle = .none
         
+        self.mainView?.mapView?.delegate = self
+        
         setupBindings()
         viewModel.load()
     }
@@ -140,6 +142,26 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension ViewController: MGLMapViewDelegate {
+    func mapView(_ mapView: MGLMapView, viewFor annotation: MGLAnnotation) -> MGLAnnotationView? {
+    
+        guard let userAnnotation = annotation as? UserAnnotation else { return nil}
+        
+        let reuseIdentifier = userAnnotation.user.login?.username ?? ""
+        let annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseIdentifier) as? UserAnnotationView ?? UserAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
+         
+        annotationView.bounds = CGRect(x: 0, y: 0, width: annotationView.preferredSize.width, height: annotationView.preferredSize.height)
+        
+        
+        annotationView.setUserAnnotation(userAnnotation)
+         
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MGLMapView, didSelect annotation: MGLAnnotation) {
+        guard let userAnnotation = annotation as? UserAnnotation else { return }
+        
+        self.presentBottomSheetWithUser(userAnnotation.user)
+    }
 }
 
 extension ViewController: BottomSheetPresenter {

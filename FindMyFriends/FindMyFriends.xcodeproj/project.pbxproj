@@ -12,6 +12,7 @@
 		8B05017F2637F47700688FF0 /* UserRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05017E2637F47700688FF0 /* UserRowView.swift */; };
 		8B0501832637FFCF00688FF0 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 8B0501822637FFCF00688FF0 /* BottomSheet */; };
 		8B0501862638040C00688FF0 /* UserDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0501852638040C00688FF0 /* UserDetailView.swift */; };
+		8B05019026384A3F00688FF0 /* UserAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05018F26384A3F00688FF0 /* UserAnnotationView.swift */; };
 		8B8B24A82632EF8B00951732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24A72632EF8B00951732 /* AppDelegate.swift */; };
 		8B8B24AA2632EF8B00951732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24A92632EF8B00951732 /* SceneDelegate.swift */; };
 		8B8B24AC2632EF8B00951732 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24AB2632EF8B00951732 /* ViewController.swift */; };
@@ -36,6 +37,7 @@
 		8B05017B2637DC5400688FF0 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		8B05017E2637F47700688FF0 /* UserRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRowView.swift; sourceTree = "<group>"; };
 		8B0501852638040C00688FF0 /* UserDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailView.swift; sourceTree = "<group>"; };
+		8B05018F26384A3F00688FF0 /* UserAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotationView.swift; sourceTree = "<group>"; };
 		8B8B24A42632EF8B00951732 /* FindMyFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindMyFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8B24A72632EF8B00951732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B8B24A92632EF8B00951732 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 				8B05017B2637DC5400688FF0 /* Appearance.swift */,
 				8B05017E2637F47700688FF0 /* UserRowView.swift */,
 				8B0501852638040C00688FF0 /* UserDetailView.swift */,
+				8B05018F26384A3F00688FF0 /* UserAnnotationView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				8B8B24D02632FFD200951732 /* helpers.swift in Sources */,
 				8B0501862638040C00688FF0 /* UserDetailView.swift in Sources */,
 				8B8B24AC2632EF8B00951732 /* ViewController.swift in Sources */,
+				8B05019026384A3F00688FF0 /* UserAnnotationView.swift in Sources */,
 				8B0501792637DA9000688FF0 /* ToggleView.swift in Sources */,
 				8B8B24A82632EF8B00951732 /* AppDelegate.swift in Sources */,
 				8B05017C2637DC5400688FF0 /* Appearance.swift in Sources */,
