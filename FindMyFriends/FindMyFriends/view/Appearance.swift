@@ -12,7 +12,7 @@ class Appearance {
     static let primaryTextColor: UIColor = UIColor.label
     static let secondaryTextColor: UIColor = UIColor.secondaryLabel
     static let highlightColor: UIColor = UIColor.secondarySystemBackground
-    static let backgroundColor: UIColor = UIColor.systemBackground
+    static let backgroundColor: UIColor = UIColor(named: "background")!
     static let accentColor: UIColor = UIColor.systemPurple
     static let shadowColor: UIColor = UIColor.secondaryLabel
     

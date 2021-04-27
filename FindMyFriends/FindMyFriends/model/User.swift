@@ -30,14 +30,41 @@ struct User: Codable {
     let location: Location?
     let email: String?
     let login: Login?
+    let registered, dob: DateAge?
     let phone, cell: String?
     let picture: Picture?
     let nat: String?
 }
 
+struct DateAge: Codable {
+    let date: Date?
+    let age: Int?
+    
+    func formattedDate(dateStyle: DateFormatter.Style = .short, timeStyle: DateFormatter.Style = .none) -> String? {
+        guard let date = self.date else {
+            return nil
+        }
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = dateStyle
+        dateFormatter.timeStyle = timeStyle
+        
+        return dateFormatter.string(from: date)
+    }
+}
+
 enum Gender: String, Codable {
     case female
     case male
+    
+    var localizedTitle: String? {
+        switch self {
+            case .female:
+                return NSLocalizedString("Female", comment: "female gender")
+            case .male:
+                return NSLocalizedString("Male", comment: "male gender")
+        }
+    }
 }
 
 struct Street: Codable {
@@ -48,7 +75,7 @@ struct Street: Codable {
 struct Location: Codable {
     let street: Street?
     let city, state: String?
-    //let postcode: Int? or String? API issue
+    let postcode: Postcode?
     let coordinates: Coordinates?
     let timezone: Timezone?
 }

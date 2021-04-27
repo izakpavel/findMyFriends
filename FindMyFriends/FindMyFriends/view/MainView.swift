@@ -107,8 +107,8 @@ class MainView: UIView {
         self.addConstraints([inputConstraintTrailing, inputConstraintBottom, inputConstraintWidth])
         
         
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_ :)))
-        self.addGestureRecognizer(tapRecognizer)
+        //let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(_ :)))
+        //self.addGestureRecognizer(tapRecognizer)
         
         self.inputPosition = .small
         self.showTable = false

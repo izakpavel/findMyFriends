@@ -7,8 +7,8 @@
 
 import UIKit
 import Combine
-import Nuke
 import Mapbox
+import BottomSheet
 
 class ViewController: UIViewController, ActivityPresentable {
 
@@ -27,6 +27,8 @@ class ViewController: UIViewController, ActivityPresentable {
     var mainView: MainView? {
         return self.view as? MainView
     }
+    
+    let bottomSheetTransitioningDelegate = BottomSheetTransitioningDelegate()
     
     // MARK: Life cycle
     
@@ -130,15 +132,38 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
-    }
-    
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let user = self.users[indexPath.row]
+        self.presentBottomSheetWithUser(user)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
 extension ViewController: MGLMapViewDelegate {
 }
 
+extension ViewController: BottomSheetPresenter {
+    
+    func presentBottomSheet() {
+        let controller = BottomSheetViewController()
+        
+        present(controller, animated: true, completion: nil)
+    }
+    
+    // MARK: presenting bottom sheet
+    
+    func presentBottomSheetWithUser(_ user: User) {
+        let controller = BottomSheetViewController()
+        controller.transitioningDelegate = bottomSheetTransitioningDelegate
+        
+        let userDetailView = UserDetailView()
+        userDetailView.setUser(user)
+        controller.contentView = userDetailView
+        
+        controller.sheetSizingStyle = .adaptive//.fixed(height: 300)
+        controller.handleStyle = .inside
+        controller.handleColor = Appearance.highlightColor
+        controller.contentInsets = UIEdgeInsets(top: Appearance.padding, left: 0, bottom: Appearance.padding, right: 0)
+        self.present(controller, animated: true, completion: nil)
+    }
+}

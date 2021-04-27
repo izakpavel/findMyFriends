@@ -57,23 +57,6 @@ class UserRowView: UIStackView {
         [imageView, vStack].forEach {
             self.addArrangedSubview($0)
         }
-        /*
-        let views: [String: UIView] = ["titleLabel": titleLabel, "detailLabel": detailLabel, "imageView": imageView]
-        views.values.forEach {
-            self.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        let metrics = ["padding": Appearance.padding]
-        
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[imageView]-padding-[titleLabel]|", options: [], metrics: metrics, views: views))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[imageView]-padding-[detailLabel]|", options: [], metrics: metrics, views: views))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[imageView]|", options: [], metrics: metrics, views: views))
-        self.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0@999-[titleLabel]-2-[detailLabel]-0@999-|", options: [], metrics: metrics, views: views))
-
-        imageView.widthAnchor.constraint(equalTo: imageView.heightAnchor).isActive = true
-        
-        self.translatesAutoresizingMaskIntoConstraints = false*/
-        
     }
     
     func setUser(_ user: User) {
