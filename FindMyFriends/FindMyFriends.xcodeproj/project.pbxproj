@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B0501792637DA9000688FF0 /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0501782637DA9000688FF0 /* ToggleView.swift */; };
+		8B05017C2637DC5400688FF0 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05017B2637DC5400688FF0 /* Appearance.swift */; };
 		8B8B24A82632EF8B00951732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24A72632EF8B00951732 /* AppDelegate.swift */; };
 		8B8B24AA2632EF8B00951732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24A92632EF8B00951732 /* SceneDelegate.swift */; };
 		8B8B24AC2632EF8B00951732 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24AB2632EF8B00951732 /* ViewController.swift */; };
@@ -27,6 +29,8 @@
 		028642BC5B93B6821007072F /* Pods-FindMyFriends.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMyFriends.debug.xcconfig"; path = "Target Support Files/Pods-FindMyFriends/Pods-FindMyFriends.debug.xcconfig"; sourceTree = "<group>"; };
 		1CD0CE0676978DAA0AD05F89 /* Pods-FindMyFriends.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FindMyFriends.release.xcconfig"; path = "Target Support Files/Pods-FindMyFriends/Pods-FindMyFriends.release.xcconfig"; sourceTree = "<group>"; };
 		3001555B9342BB8546C566EC /* Pods_FindMyFriends.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FindMyFriends.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8B0501782637DA9000688FF0 /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
+		8B05017B2637DC5400688FF0 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
 		8B8B24A42632EF8B00951732 /* FindMyFriends.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FindMyFriends.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B8B24A72632EF8B00951732 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B8B24A92632EF8B00951732 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -116,6 +120,8 @@
 			children = (
 				8B8B24CC2632FD2C00951732 /* MainView.swift */,
 				8BC02DC226374820006ABF99 /* InputView.swift */,
+				8B0501782637DA9000688FF0 /* ToggleView.swift */,
+				8B05017B2637DC5400688FF0 /* Appearance.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -247,7 +253,9 @@
 				8B8B24C72632F60000951732 /* Networking.swift in Sources */,
 				8B8B24D02632FFD200951732 /* helpers.swift in Sources */,
 				8B8B24AC2632EF8B00951732 /* ViewController.swift in Sources */,
+				8B0501792637DA9000688FF0 /* ToggleView.swift in Sources */,
 				8B8B24A82632EF8B00951732 /* AppDelegate.swift in Sources */,
+				8B05017C2637DC5400688FF0 /* Appearance.swift in Sources */,
 				8BC02DC326374820006ABF99 /* InputView.swift in Sources */,
 				8BC02DCB26376E99006ABF99 /* UserAnnotation.swift in Sources */,
 				8B8B24AA2632EF8B00951732 /* SceneDelegate.swift in Sources */,

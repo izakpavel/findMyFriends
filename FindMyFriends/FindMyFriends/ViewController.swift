@@ -32,12 +32,10 @@ class ViewController: UIViewController, ActivityPresentable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        self.mainView?.countView?.inputTextfield?.text = "ABC"
-        self.mainView?.displayToggle?.setAction (for: UIControl.Event.valueChanged, { [weak self] in
-            self?.mainView?.showTable = self?.mainView?.displayToggle?.isOn ?? false
-        })
+        self.mainView?.displayToggle?.didChangeToggle = { [weak self] (value) in
+            self?.mainView?.showTable = value
+        }
         
         self.mainView?.userTable?.delegate = self
         self.mainView?.userTable?.dataSource = self
@@ -94,16 +92,17 @@ class ViewController: UIViewController, ActivityPresentable {
     
     func handleKeyboardNotification(notification: Notification) {
         guard let keyboardRect = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else {return}
-            
+        
+        let duration: NSNumber = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber ?? NSNumber(0.3))
         let showNotification = notification.name == UIResponder.keyboardWillShowNotification ? true : false
         if (showNotification) {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: duration.doubleValue) {
                 self.mainView?.inputPosition = .expanded(keyboardRect.height)
                 self.mainView?.layoutIfNeeded()
             }
         }
         else {
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: duration.doubleValue) {
                 self.mainView?.inputPosition = .small
                 self.mainView?.layoutIfNeeded()
             }
@@ -122,10 +121,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let user = self.users[indexPath.row]
         
         cell.textLabel?.text = user.name?.fullName
+        cell.textLabel?.textColor = Appearance.primaryTextColor
         cell.detailTextLabel?.text = user.login?.username
-        cell.detailTextLabel?.textColor = UIColor.secondaryLabel
-        cell.imageView?.layer.cornerRadius = 21
-        cell.imageView?.layer.masksToBounds = true
+        cell.detailTextLabel?.textColor = Appearance.secondaryTextColor
+        cell.detailTextLabel?.numberOfLines = 0
         cell.accessoryType = .disclosureIndicator
         
         
@@ -135,10 +134,22 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
               transition: .fadeIn(duration: 0.3)
             )
             
-            Nuke.loadImage(with: url, options: options, into: imageView)
+            let imageRequest = ImageRequest(url: url, processors: [
+                ImageProcessors.Resize(size: CGSize(width: 64, height: 64)),
+                ImageProcessors.Circle()
+            ])
+            Nuke.loadImage(with: imageRequest, options: options, into: imageView)
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
 

@@ -13,7 +13,7 @@ import Mapbox
 class MainView: UIView {
     weak var userTable: UITableView?
     weak var mapView: MGLMapView?
-    weak var displayToggle: UISwitch?
+    weak var displayToggle: ToggleView?
     weak var countView: InputView?
     
     private var inputConstraintWidth: NSLayoutConstraint?
@@ -44,17 +44,17 @@ class MainView: UIView {
             switch self.inputPosition {
             case .small:
                 self.inputConstraintWidth?.constant = 44
-                self.inputConstraintBottom?.constant = -16
-                self.inputConstraintTrailing?.constant = -16
+                self.inputConstraintBottom?.constant = -Appearance.padding
+                self.inputConstraintTrailing?.constant = -Appearance.padding
                 self.countView?.titleLabel?.isHidden = true
-                self.countView?.layer.cornerRadius = 22
+                self.countView?.titleLabel?.alpha = 0
                 
             case .expanded(let bottomOffset):
                 self.inputConstraintWidth?.constant = self.superview?.bounds.width ?? 0
                 self.inputConstraintBottom?.constant = -bottomOffset
                 self.inputConstraintTrailing?.constant = 0
                 self.countView?.titleLabel?.isHidden = false
-                self.countView?.layer.cornerRadius = 0
+                self.countView?.titleLabel?.alpha = 1
             }
         }
     }
@@ -62,15 +62,14 @@ class MainView: UIView {
     func commonInit() {
         
         let mapView = MGLMapView()
-        mapView.backgroundColor = UIColor.blue
         self.mapView = mapView
         
         let userTable = UITableView(frame: CGRect(), style: .plain)
-        userTable.backgroundColor = UIColor.orange
         userTable.tableFooterView = UIView()
+        userTable.separatorStyle = .none
         self.userTable = userTable
         
-        let displayToggle = UISwitch()
+        let displayToggle = ToggleView()
         self.displayToggle = displayToggle
         
         let countView = InputView()
@@ -86,16 +85,12 @@ class MainView: UIView {
         self.addConstraints(userTable.pinToSuperviewConstraints())
         self.addConstraints(mapView.pinToSuperviewConstraints())
         
-        let padding:CGFloat = 16
+        let padding:CGFloat = Appearance.padding
         
         displayToggle.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -padding).isActive = true
         displayToggle.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: padding).isActive = true
-        
-        displayToggle.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        countView.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
-        
-        // will remove
-        displayToggle.widthAnchor.constraint(equalToConstant: 44).isActive = true
+        displayToggle.heightAnchor.constraint(equalTo: countView.heightAnchor).isActive = true
+        displayToggle.widthAnchor.constraint(greaterThanOrEqualToConstant: 128).isActive = true
         
         let inputConstraintTrailing = countView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding)
         self.inputConstraintTrailing = inputConstraintTrailing
@@ -113,6 +108,7 @@ class MainView: UIView {
         self.addGestureRecognizer(tapRecognizer)
         
         self.inputPosition = .small
+        self.showTable = false
     }
     
     @objc private func handleTap(_ sender: UITapGestureRecognizer) {

@@ -24,14 +24,14 @@ class InputView: UIView {
     }
 
     func commonInit() {
-        self.backgroundColor = UIColor.systemBackground
-        self.layer.shadowColor = UIColor.secondaryLabel.cgColor
-        self.layer.shadowOpacity = 0.3
+        self.backgroundColor = Appearance.backgroundColor
+        self.layer.shadowColor = Appearance.shadowColor.cgColor
+        self.layer.shadowOpacity = 0.7
         self.layer.shadowOffset = CGSize()
         
         let stackView = UIStackView()
         stackView.distribution = .equalSpacing
-        stackView.spacing = 8.0
+        stackView.spacing = Appearance.padding
         stackView.alignment = .center
         stackView.axis = .horizontal
         
@@ -41,14 +41,15 @@ class InputView: UIView {
         
         let titleLabel = UILabel()
         titleLabel.text = NSLocalizedString("No. of users", comment: "User input prefix")
-        titleLabel.textColor = UIColor.secondaryLabel
+        titleLabel.textColor = Appearance.secondaryTextColor
         titleLabel.font = UIFont.preferredFont(forTextStyle: .headline)
         self.titleLabel = titleLabel
         
         let inputTextfield = UITextField()
-        inputTextfield.textColor = UIColor.label
+        inputTextfield.textColor = Appearance.primaryTextColor
         inputTextfield.font = UIFont.preferredFont(forTextStyle: .headline)
         inputTextfield.keyboardType = .decimalPad
+        inputTextfield.textAlignment = .center
         self.inputTextfield = inputTextfield
         
         [titleLabel, inputTextfield].forEach{
@@ -56,6 +57,20 @@ class InputView: UIView {
         }
         
         self.translatesAutoresizingMaskIntoConstraints = false
-        self.addConstraints(stackView.pinToSuperviewConstraints(insets: UIEdgeInsets(top: 8, left: 16, bottom: 8, right: 16)))
+        self.addConstraints(stackView.pinToSuperviewConstraints(insets: UIEdgeInsets(top: Appearance.padding, left: Appearance.padding, bottom: Appearance.padding, right: Appearance.padding)))
+        
+        inputTextfield.widthAnchor.constraint(greaterThanOrEqualTo: inputTextfield.heightAnchor, multiplier: 1.0).isActive = true
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if (self.bounds.width>self.bounds.height) {
+            self.layer.cornerRadius = 0
+        }
+        else {
+            self.layer.cornerRadius = self.bounds.height/2
+        }
+        
     }
 }
