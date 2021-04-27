@@ -127,3 +127,107 @@ extension ActivityPresentable where Self: UIViewController {
     }
 }
 
+// MARK: GenericCell
+
+class GenericViewCell<View: UIView> : UITableViewCell{
+    var cellView: View?
+    var pinConstraints: [NSLayoutConstraint] = []
+    
+    var padding: CGFloat {
+        set {
+            self.edgeInsets = UIEdgeInsets(top: newValue, left: newValue, bottom: newValue, right: newValue)
+        }
+        get {
+            return self.edgeInsets.left
+        }
+    }
+
+    var edgeInsets: UIEdgeInsets = UIEdgeInsets(){
+        didSet {
+            self.recreatePinConstraints()
+        }
+    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.commonInit()
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.commonInit()
+    }
+    
+    func commonInit() {
+        let cellView = View()
+        self.contentView.addSubview(cellView)
+        self.translatesAutoresizingMaskIntoConstraints = false
+        cellView.translatesAutoresizingMaskIntoConstraints = false
+        self.cellView = cellView
+        self.recreatePinConstraints()
+    }
+    
+    func recreatePinConstraints () {
+        if let cellView = self.cellView {
+            self.contentView.removeConstraints(self.pinConstraints)
+            
+            self.pinConstraints = cellView.pinToSuperviewConstraints(insets: self.edgeInsets)
+            
+            self.contentView.addConstraints(self.pinConstraints)
+        }
+    }
+}
+
+// MARK: Reusable
+
+protocol Reusable {
+    static var reuseId: String { get }
+}
+
+extension Reusable {
+    static var reuseId: String {
+        return String(describing: Self.self)
+    }
+}
+
+extension UITableViewCell: Reusable { }
+extension UITableViewHeaderFooterView: Reusable {}
+extension UICollectionViewCell: Reusable {}
+
+extension UITableView {
+    func registerCell<Cell: UITableViewCell>(_ cellClass: Cell.Type) {
+        if Bundle.main.path(forResource: cellClass.reuseId, ofType: "nib") != nil { // class available as xib
+           register(UINib(nibName: cellClass.reuseId, bundle: nil), forCellReuseIdentifier: cellClass.reuseId)
+        }
+        else {
+            register(cellClass, forCellReuseIdentifier: cellClass.reuseId)
+        }
+    }
+    
+    func registerHeaderFooter<HeaderFooter: UITableViewHeaderFooterView>(_ headerClass: HeaderFooter.Type) {
+        if Bundle.main.path(forResource: headerClass.reuseId, ofType: "nib") != nil { // class available as xib
+           register(UINib(nibName: headerClass.reuseId, bundle: nil), forHeaderFooterViewReuseIdentifier: headerClass.reuseId)
+        }
+        else {
+            register(headerClass, forHeaderFooterViewReuseIdentifier:headerClass.reuseId)
+        }
+    }
+    
+    func dequeReusableCell<Cell: UITableViewCell>(forIndexPath indexPath: IndexPath) -> Cell {
+        if let cell = self.dequeueReusableCell(withIdentifier: Cell.reuseId, for: indexPath) as? Cell {
+            return cell
+        }
+        else {
+            return Cell(style: .default, reuseIdentifier: Cell.reuseId)
+        }
+    }
+    
+    func dequeReusableHeaderFooterView<HeaderFooter: UITableViewHeaderFooterView>() -> HeaderFooter {
+        if let headerFooter = self.dequeueReusableHeaderFooterView(withIdentifier: HeaderFooter.reuseId) as? HeaderFooter {
+            return headerFooter
+        }
+        else {
+            return HeaderFooter(reuseIdentifier: HeaderFooter.reuseId)
+        }
+    }
+}

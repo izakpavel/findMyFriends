@@ -39,6 +39,8 @@ class ViewController: UIViewController, ActivityPresentable {
         
         self.mainView?.userTable?.delegate = self
         self.mainView?.userTable?.dataSource = self
+        self.mainView?.userTable?.registerCell(GenericViewCell<UserRowView>.self)
+        self.mainView?.userTable?.separatorStyle = .none
         
         setupBindings()
         viewModel.load()
@@ -116,31 +118,10 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UserCell") ??  UITableViewCell(style: .subtitle, reuseIdentifier: "UserCell")
-        
+        let cell = tableView.dequeReusableCell(forIndexPath: indexPath) as GenericViewCell<UserRowView>
+        cell.padding = Appearance.padding
         let user = self.users[indexPath.row]
-        
-        cell.textLabel?.text = user.name?.fullName
-        cell.textLabel?.textColor = Appearance.primaryTextColor
-        cell.detailTextLabel?.text = user.login?.username
-        cell.detailTextLabel?.textColor = Appearance.secondaryTextColor
-        cell.detailTextLabel?.numberOfLines = 0
-        cell.accessoryType = .disclosureIndicator
-        
-        
-        if let url = URL(string: user.picture?.large ?? ""), let imageView = cell.imageView {
-            let options = ImageLoadingOptions(
-              placeholder: UIImage(named: "placeholder"),
-              transition: .fadeIn(duration: 0.3)
-            )
-            
-            let imageRequest = ImageRequest(url: url, processors: [
-                ImageProcessors.Resize(size: CGSize(width: 64, height: 64)),
-                ImageProcessors.Circle()
-            ])
-            Nuke.loadImage(with: imageRequest, options: options, into: imageView)
-        }
-        
+        cell.cellView?.setUser(user)
         return cell
     }
     
