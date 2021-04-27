@@ -9,6 +9,10 @@ import Foundation
 import UIKit
 import Mapbox
 
+enum InputPosition {
+    case expanded (CGFloat)
+    case small
+}
 
 class MainView: UIView {
     weak var userTable: UITableView?
@@ -21,7 +25,10 @@ class MainView: UIView {
     private var inputConstraintBottom: NSLayoutConstraint?
     
     var showTable: Bool = false {
-        didSet { self.userTable?.setVisibilityAnimated(self.showTable) }
+        didSet {
+            self.userTable?.setVisibilityAnimated(self.showTable)
+            self.userTable?.flashScrollIndicators()
+        }
     }
     
     override init(frame: CGRect) {
@@ -34,13 +41,9 @@ class MainView: UIView {
         self.commonInit()
     }
     
-    enum InputPosition {
-        case expanded (CGFloat)
-        case small
-    }
-    
     var inputPosition: InputPosition = .small {
         didSet {
+            self.countView?.inputPosition = self.inputPosition
             switch self.inputPosition {
             case .small:
                 self.inputConstraintWidth?.constant = 44

@@ -22,6 +22,8 @@ class InputView: UIView {
         super.init(coder: coder)
         self.commonInit()
     }
+    
+    var inputPosition: InputPosition?
 
     func commonInit() {
         self.backgroundColor = Appearance.backgroundColor
@@ -65,11 +67,11 @@ class InputView: UIView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        if (self.bounds.width>self.bounds.height) {
-            self.layer.cornerRadius = 0
+        if case .small = self.inputPosition {
+            self.layer.cornerRadius = self.bounds.height/2
         }
         else {
-            self.layer.cornerRadius = self.bounds.height/2
+            self.layer.cornerRadius = 0
         }
         
     }

@@ -62,12 +62,12 @@ class ToggleView: UIView {
         
         let leftView = UIButton()
         leftView.imageView?.tintColor = Appearance.accentColor
-        leftView.setImage(UIImage(systemName: "map"), for: .normal)
+        leftView.setImage(UIImage(systemName: "map", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)), for: .normal)
         self.leftView = leftView
         
         let rightView = UIButton()
         rightView.imageView?.tintColor = Appearance.accentColor
-        rightView.setImage(UIImage(systemName: "list.bullet"), for: .normal)
+        rightView.setImage(UIImage(systemName: "list.bullet", withConfiguration: UIImage.SymbolConfiguration(pointSize: 20, weight: .bold)), for: .normal)
         self.rightView = rightView
         
         

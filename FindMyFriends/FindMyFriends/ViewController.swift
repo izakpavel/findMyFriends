@@ -74,6 +74,11 @@ class ViewController: UIViewController, ActivityPresentable {
                     self?.setActivityIndicatorState(visible: isLoading)
                 }
                 .store(in: &subscriptions)
+        
+        self.mainView?.countView?.inputTextfield?.setAction(for: .editingDidEnd) {
+            self.viewModel.requestUserCount = self.mainView?.countView?.inputTextfield?.text ?? ""
+            self.viewModel.load()
+        }
     }
     
     // MARK: handling keyboard

@@ -3,13 +3,14 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8B0501792637DA9000688FF0 /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B0501782637DA9000688FF0 /* ToggleView.swift */; };
 		8B05017C2637DC5400688FF0 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05017B2637DC5400688FF0 /* Appearance.swift */; };
 		8B05017F2637F47700688FF0 /* UserRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B05017E2637F47700688FF0 /* UserRowView.swift */; };
+		8B0501832637FFCF00688FF0 /* BottomSheet in Frameworks */ = {isa = PBXBuildFile; productRef = 8B0501822637FFCF00688FF0 /* BottomSheet */; };
 		8B8B24A82632EF8B00951732 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24A72632EF8B00951732 /* AppDelegate.swift */; };
 		8B8B24AA2632EF8B00951732 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24A92632EF8B00951732 /* SceneDelegate.swift */; };
 		8B8B24AC2632EF8B00951732 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8B24AB2632EF8B00951732 /* ViewController.swift */; };
@@ -56,6 +57,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE61ABDBC1F6160DE7398EB7 /* Pods_FindMyFriends.framework in Frameworks */,
+				8B0501832637FFCF00688FF0 /* BottomSheet in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -155,6 +157,9 @@
 			dependencies = (
 			);
 			name = FindMyFriends;
+			packageProductDependencies = (
+				8B0501822637FFCF00688FF0 /* BottomSheet */,
+			);
 			productName = FindMyFriends;
 			productReference = 8B8B24A42632EF8B00951732 /* FindMyFriends.app */;
 			productType = "com.apple.product-type.application";
@@ -182,6 +187,9 @@
 				Base,
 			);
 			mainGroup = 8B8B249B2632EF8B00951732;
+			packageReferences = (
+				8B0501812637FFCF00688FF0 /* XCRemoteSwiftPackageReference "BottomSheet" */,
+			);
 			productRefGroup = 8B8B24A52632EF8B00951732 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -467,6 +475,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B0501812637FFCF00688FF0 /* XCRemoteSwiftPackageReference "BottomSheet" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gaetanomatonti/BottomSheet";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B0501822637FFCF00688FF0 /* BottomSheet */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B0501812637FFCF00688FF0 /* XCRemoteSwiftPackageReference "BottomSheet" */;
+			productName = BottomSheet;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 8B8B249C2632EF8B00951732 /* Project object */;
 }
