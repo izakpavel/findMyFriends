@@ -25,11 +25,37 @@ class MainView: UIView {
     private var inputConstraintWidth: NSLayoutConstraint?
     private var inputConstraintTrailing: NSLayoutConstraint?
     private var inputConstraintBottom: NSLayoutConstraint?
+    private var buttonConstraintBottom: NSLayoutConstraint?
     
     var showTable: Bool = false {
         didSet {
-            self.userTable?.setVisibilityAnimated(self.showTable)
+            //self.userTable?.setVisibilityAnimated(self.showTable)
+            self.showTableAnimated(showTable)
             self.userTable?.flashScrollIndicators()
+        }
+    }
+    
+    func showTableAnimated(_ visible: Bool) {
+        guard let table = self.userTable, let map = self.mapView else { return }
+        if (!visible) {
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut]) {
+                table.alpha = 0.0
+                table.transform = CGAffineTransform(scaleX: 0.9, y: 0.9).translatedBy(x: 44, y: 0)
+                map.transform = CGAffineTransform(scaleX: 1, y: 1)
+            } completion: { (completed) in
+                if (completed) {
+                    table.isHidden = true
+                }
+            }
+        }
+        else {
+            table.isHidden = false
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut]) {
+                table.alpha = 1.0
+                table.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                map.transform = CGAffineTransform(scaleX: 0.9, y: 0.9).translatedBy(x: -44, y: 0)
+            } completion: { (completed) in
+            }
         }
     }
     
@@ -55,6 +81,8 @@ class MainView: UIView {
                 self.countView?.titleLabel?.alpha = 0
                 self.confirmButton?.alpha = 0
                 self.overlayView?.alpha = 0
+                self.buttonConstraintBottom?.constant = 44
+                self.confirmButton?.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
                 
             case .expanded(let bottomOffset):
                 self.inputConstraintWidth?.constant = self.superview?.bounds.width ?? 0
@@ -64,6 +92,8 @@ class MainView: UIView {
                 self.countView?.titleLabel?.alpha = 1
                 self.confirmButton?.alpha = 1
                 self.overlayView?.alpha = 1
+                self.buttonConstraintBottom?.constant = -Appearance.padding
+                self.confirmButton?.transform = CGAffineTransform(rotationAngle: 0)
             }
         }
     }
@@ -83,6 +113,8 @@ class MainView: UIView {
         let userTable = UITableView(frame: CGRect(), style: .plain)
         userTable.tableFooterView = UIView()
         userTable.separatorStyle = .none
+        userTable.isHidden = true
+        
         self.userTable = userTable
         
         let displayToggle = ToggleView()
@@ -104,7 +136,7 @@ class MainView: UIView {
         
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        [mapView, userTable, overlayView, displayToggle, countView, confirmButton].forEach{
+        [mapView, userTable, overlayView, displayToggle, confirmButton, countView].forEach{
             self.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -129,15 +161,24 @@ class MainView: UIView {
         let inputConstraintWidth = countView.widthAnchor.constraint(greaterThanOrEqualToConstant: 44)
         self.inputConstraintWidth = inputConstraintWidth
         
-        self.addConstraints([inputConstraintTrailing, inputConstraintBottom, inputConstraintWidth])
+        let buttonConstraintBottom = confirmButton.bottomAnchor.constraint(equalTo: countView.topAnchor, constant: -padding)
+        self.buttonConstraintBottom = buttonConstraintBottom
         
-        confirmButton.bottomAnchor.constraint(equalTo: countView.topAnchor, constant: -padding).isActive = true
+        self.addConstraints([inputConstraintTrailing, inputConstraintBottom, inputConstraintWidth, buttonConstraintBottom])
+        
         confirmButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -padding).isActive = true
         confirmButton.widthAnchor.constraint(equalToConstant: 44).isActive = true
         confirmButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
         
         self.inputPosition = .small
         self.showTable = false
+    }
+    
+    override func layoutSubviews() {
+        super .layoutSubviews()
+        
+        let insets = self.userTable?.contentInset ?? UIEdgeInsets()
+        self.userTable?.contentInset = UIEdgeInsets(top: insets.top, left: 0, bottom: 44 + 2*Appearance.padding, right: 0)
     }
     
     @objc private func handleTap(_ sender: UITapGestureRecognizer) {

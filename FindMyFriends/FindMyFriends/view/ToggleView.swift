@@ -43,8 +43,10 @@ class ToggleView: UIView {
             else {
                 self.highlightConstraint = highlightView.centerXAnchor.constraint(equalTo: leftView.centerXAnchor)
             }
-            UIView.animate(withDuration: 0.3) {
+            UIView.animate(withDuration: 0.3, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut]) {
                 self.highlightConstraint?.isActive = true
+                self.leftView?.transform = self.toggleValue ? CGAffineTransform(scaleX: 0.9, y: 0.9) : CGAffineTransform.identity
+                self.rightView?.transform = !self.toggleValue ? CGAffineTransform(scaleX: 0.9, y: 0.9) : CGAffineTransform.identity
                 self.layoutIfNeeded()
             }
         }

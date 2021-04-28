@@ -107,13 +107,13 @@ class ViewController: UIViewController, ActivityPresentable {
         let duration: NSNumber = (notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? NSNumber ?? NSNumber(0.3))
         let showNotification = notification.name == UIResponder.keyboardWillShowNotification ? true : false
         if (showNotification) {
-            UIView.animate(withDuration: duration.doubleValue) {
+            UIView.animate(withDuration: duration.doubleValue, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut]) {
                 self.mainView?.inputPosition = .expanded(keyboardRect.height)
                 self.mainView?.layoutIfNeeded()
             }
         }
         else {
-            UIView.animate(withDuration: duration.doubleValue) {
+            UIView.animate(withDuration: duration.doubleValue, delay: 0, options: [.beginFromCurrentState, .curveEaseInOut]) {
                 self.mainView?.inputPosition = .small
                 self.mainView?.layoutIfNeeded()
             }
