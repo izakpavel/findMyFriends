@@ -12,13 +12,13 @@ struct MainView: View {
         VStack {
             // header
             HStack {
-                ToggleView(left: "♀️", right: "♂️")
                 Spacer()
                 ToggleView(left: "magnifyingglass", right: "heart")
             }
             
         }
         .background(Color.background)
+        .overlay(LoadingIndicator().foregroundColor(.primary))
     }
 }
 

@@ -19,6 +19,7 @@
 		8BA7641126550D2D00D06A37 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7641026550D2D00D06A37 /* MainView.swift */; };
 		8BA7641326550D6F00D06A37 /* ToggleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7641226550D6F00D06A37 /* ToggleView.swift */; };
 		8BA7641526552AE200D06A37 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA7641426552AE200D06A37 /* Appearance.swift */; };
+		8BA76417265537B300D06A37 /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BA76416265537B300D06A37 /* LoadingIndicator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		8BA7641026550D2D00D06A37 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8BA7641226550D6F00D06A37 /* ToggleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToggleView.swift; sourceTree = "<group>"; };
 		8BA7641426552AE200D06A37 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		8BA76416265537B300D06A37 /* LoadingIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				8BA7641026550D2D00D06A37 /* MainView.swift */,
 				8BA7641226550D6F00D06A37 /* ToggleView.swift */,
 				8BA7641426552AE200D06A37 /* Appearance.swift */,
+				8BA76416265537B300D06A37 /* LoadingIndicator.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -178,6 +181,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BA76417265537B300D06A37 /* LoadingIndicator.swift in Sources */,
 				8BA7640C26550C6100D06A37 /* MainViewModel.swift in Sources */,
 				8BA7641126550D2D00D06A37 /* MainView.swift in Sources */,
 				8B2585442655023A00A8D243 /* Persistence.swift in Sources */,
