@@ -12,9 +12,20 @@ struct UserListView: View {
     var users: [User]
     
     var body: some View {
-        List() {
-            ForEach (self.users) { user in
-                Text(user.email ?? "")
+        ScrollView(.vertical, showsIndicators: true) {
+            LazyVStack() {
+                ForEach (self.users) { user in
+                    HStack {
+                        ImageView(url: URL(string: user.picture?.large ?? "")!)
+                            .frame(width: 64, height: 64)
+                            .clipShape(Circle())
+                        
+                        Text(user.email ?? "")
+                        
+                        Spacer()
+                    }
+                    .padding()
+                }
             }
         }
     }

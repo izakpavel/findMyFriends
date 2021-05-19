@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		8B19F8B42655A567009663EC /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B19F8B32655A567009663EC /* UserListView.swift */; };
+		8B19F8B72655AEE3009663EC /* FetchImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8B19F8B62655AEE3009663EC /* FetchImage */; };
 		8B25853B2655023900A8D243 /* BFFsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B25853A2655023900A8D243 /* BFFsApp.swift */; };
 		8B25853D2655023900A8D243 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B25853C2655023900A8D243 /* ContentView.swift */; };
 		8B25853F2655023A00A8D243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B25853E2655023A00A8D243 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B19F8B72655AEE3009663EC /* FetchImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +139,9 @@
 			dependencies = (
 			);
 			name = BFFs;
+			packageProductDependencies = (
+				8B19F8B62655AEE3009663EC /* FetchImage */,
+			);
 			productName = BFFs;
 			productReference = 8B2585372655023900A8D243 /* BFFs.app */;
 			productType = "com.apple.product-type.application";
@@ -164,6 +169,9 @@
 				Base,
 			);
 			mainGroup = 8B25852E2655023900A8D243;
+			packageReferences = (
+				8B19F8B52655AEE3009663EC /* XCRemoteSwiftPackageReference "FetchImage" */,
+			);
 			productRefGroup = 8B2585382655023900A8D243 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -392,6 +400,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8B19F8B52655AEE3009663EC /* XCRemoteSwiftPackageReference "FetchImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kean/FetchImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.4.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8B19F8B62655AEE3009663EC /* FetchImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8B19F8B52655AEE3009663EC /* XCRemoteSwiftPackageReference "FetchImage" */;
+			productName = FetchImage;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8B2585452655023A00A8D243 /* BFFs.xcdatamodeld */ = {

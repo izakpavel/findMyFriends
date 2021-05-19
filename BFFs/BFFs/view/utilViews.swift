@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FetchImage
 
 struct ButtonCircleView: View {
     let icon: String
@@ -20,5 +21,26 @@ struct ButtonCircleView: View {
             .background(Color.backgroundSecondary)
             .clipShape(Circle())
             .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 2)
+    }
+}
+
+struct ImageView: View {
+    let url: URL
+
+    @StateObject private var image = FetchImage()
+
+    var body: some View {
+        
+        ZStack {
+            Color.backgroundSecondary
+            image.view?
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .clipped()
+        }
+        
+        .onAppear { image.load(url) }
+        .onChange(of: url) { image.load($0) }
+        .onDisappear(perform: image.reset)
     }
 }
