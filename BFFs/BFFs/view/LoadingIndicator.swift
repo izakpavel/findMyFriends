@@ -11,6 +11,7 @@ struct LoadingIndicator: View {
     private let animationDuration: Double = 1.3
     let count = 7
     let size: CGFloat = 12
+    let color = Color.accentColor
     @State var value: CGFloat = 0
     
     func startAnimation() {
@@ -23,6 +24,7 @@ struct LoadingIndicator: View {
         ZStack {
             ForEach(0 ..< self.count) { index in
                 Circle()
+                    .fill(self.color)
                     .offset(CGSize(width: value*self.size, height: 0.0))
                     .rotationEffect(Angle(degrees: 360/Double(self.count)*Double(index)))
                     .opacity(1.0/Double(count))

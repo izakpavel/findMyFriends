@@ -45,10 +45,11 @@ struct ToggleViewHighlightShape: Shape {
 }
 
 struct ToggleView: View {
+    @Binding var value: Bool
     
     let left: String
     let right: String
-    @State var value: Bool = true
+    
     
     var backgroundValue: CGFloat {
         return value ? 1.0 : 0.0
@@ -59,18 +60,19 @@ struct ToggleView: View {
         let backgroundView = GeometryReader { geometry in
             Color.backgroundSecondary
                 .clipShape(RoundedRectangle(cornerRadius: geometry.size.height/2))
+                .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 2)
         }
         
         return HStack (alignment: .center, spacing: 0) {
             Group {
                 IconView(name: left)
-                    .foregroundColor(self.value ? .secondary : .primary)
+                    .foregroundColor(self.value ? .secondary : .white)
                     .scaleEffect(self.value ? 0.8 : 1.0)
                 IconView(name: right)
-                    .foregroundColor(self.value ? .primary : .secondary)
+                    .foregroundColor(self.value ? .white : .secondary)
                     .scaleEffect(self.value ? 1.0 : 0.8)
             }
-            .font(.title)
+            .font(.title2)
             .padding(8)
         }
         .background (

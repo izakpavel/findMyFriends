@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B19F8B42655A567009663EC /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B19F8B32655A567009663EC /* UserListView.swift */; };
 		8B25853B2655023900A8D243 /* BFFsApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B25853A2655023900A8D243 /* BFFsApp.swift */; };
 		8B25853D2655023900A8D243 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B25853C2655023900A8D243 /* ContentView.swift */; };
 		8B25853F2655023A00A8D243 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B25853E2655023A00A8D243 /* Assets.xcassets */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B19F8B32655A567009663EC /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
 		8B2585372655023900A8D243 /* BFFs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BFFs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B25853A2655023900A8D243 /* BFFsApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BFFsApp.swift; sourceTree = "<group>"; };
 		8B25853C2655023900A8D243 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				8BA76416265537B300D06A37 /* LoadingIndicator.swift */,
 				8BA7641826553C3700D06A37 /* UserGalleryView.swift */,
 				8BA7641A265544D300D06A37 /* utilViews.swift */,
+				8B19F8B32655A567009663EC /* UserListView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -194,6 +197,7 @@
 				8B2585442655023A00A8D243 /* Persistence.swift in Sources */,
 				8B25853D2655023900A8D243 /* ContentView.swift in Sources */,
 				8BA7640D26550C6100D06A37 /* Networking.swift in Sources */,
+				8B19F8B42655A567009663EC /* UserListView.swift in Sources */,
 				8BA7641926553C3700D06A37 /* UserGalleryView.swift in Sources */,
 				8BA7641526552AE200D06A37 /* Appearance.swift in Sources */,
 				8B2585472655023A00A8D243 /* BFFs.xcdatamodeld in Sources */,

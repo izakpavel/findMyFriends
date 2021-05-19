@@ -14,10 +14,11 @@ struct ButtonCircleView: View {
     
     var body: some View {
         Image(systemName: icon)
-            .font(isLarge ? .largeTitle : .title)
+            .font(isLarge ? .largeTitle : .title2)
             .foregroundColor(color)
             .padding(isLarge ? 32 : 16)
             .background(Color.backgroundSecondary)
             .clipShape(Circle())
+            .shadow(color: .black.opacity(0.2), radius: 3, x: 0, y: 2)
     }
 }

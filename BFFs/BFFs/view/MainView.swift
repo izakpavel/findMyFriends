@@ -12,38 +12,52 @@ struct MainView: View {
     
     var body: some View {
         VStack {
+            
             // header
             HStack {
-                Button(action: {self.viewModel.load()}) {
-                    ButtonCircleView(icon: "arrow.clockwise", color: .primary, isLarge: false)
+                if (viewModel.showList) {
+                    Text("My BFFs").font(.title)
+                }
+                else {
+                    Button(action: {self.viewModel.load()}) {
+                        ButtonCircleView(icon: "arrow.clockwise", color: .primary, isLarge: false)
+                    }
                 }
                 Spacer()
-                ToggleView(left: "magnifyingglass", right: "heart")
+                ToggleView(value: self.$viewModel.showList, left: "magnifyingglass", right: "heart")
             }
             .padding()
             
-            Spacer()
             
-            UserGalleryView(users: self.viewModel.users)
-            
-            Spacer()
-            
-            // controls
-            HStack {
+            if (viewModel.showList) {
+                UserListView(users: self.viewModel.users)
+            }
+            else {
                 Spacer()
-                Button(action: {self.viewModel.popCurrentUser()}) {
-                    ButtonCircleView(icon: "xmark", color: .primary, isLarge: false)
-                }
+                
+                UserGalleryView(users: self.viewModel.users)
+                
                 Spacer()
-                Button(action: {self.viewModel.addToFavourites()}) {
-                    ButtonCircleView(icon: "heart.fill", color: .accentColor, isLarge: true)
+                
+                // controls
+                HStack {
+                    Spacer()
+                    Group {
+                        Button(action: {self.viewModel.popCurrentUser()}) {
+                            ButtonCircleView(icon: "xmark", color: .primary, isLarge: false)
+                        }
+                        Button(action: {self.viewModel.addToFavourites()}) {
+                            ButtonCircleView(icon: "heart.fill", color: .accentColor, isLarge: true)
+                        }
+                    }
+                    .padding(.horizontal)
+                    Spacer()
                 }
+                
                 Spacer()
             }
-            
-            Spacer()
         }
-        .background(Color.background)
+        .background(Color.background.edgesIgnoringSafeArea(.all))
         .overlay(LoadingIndicator().foregroundColor(.primary).opacity(self.viewModel.isLoading ? 1.0 : 0.0))
         .onAppear{
             self.viewModel.load()
