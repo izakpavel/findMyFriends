@@ -11,7 +11,6 @@ import Combine
 class MainViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var users: [User] = []
-    @Published var requestUserCount: String = "5"
     @Published var showList: Bool = false
     
     private var cancellable: AnyCancellable?
@@ -22,12 +21,20 @@ class MainViewModel: ObservableObject {
         
         self.isLoading = true
         
-        self.cancellable = provider.getUsers(count: Int(self.requestUserCount) ?? 5)
+        self.cancellable = provider.getUsers(count: 7)
             .receive(on: DispatchQueue.main)
             .sink(receiveValue: { items in
                 self.users = items
                 self.isLoading = false
                 self.objectWillChange.send()
         })
+    }
+    
+    func popCurrentUser() {
+        
+    }
+    
+    func addToFavourites() {
+        
     }
 }

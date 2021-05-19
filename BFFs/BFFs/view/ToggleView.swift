@@ -55,27 +55,30 @@ struct ToggleView: View {
     }
     
     var body: some View {
-        GeometryReader { geometry in
-            HStack (alignment: .center, spacing: 0) {
-                Group {
-                    IconView(name: left)
-                        .foregroundColor(self.value ? .secondary : .primary)
-                        .scaleEffect(self.value ? 0.8 : 1.0)
-                    IconView(name: right)
-                        .foregroundColor(self.value ? .primary : .secondary)
-                        .scaleEffect(self.value ? 1.0 : 0.8)
-                }
-                .font(.title)
-                .padding(8)
-            }
-            .background (
-                ToggleViewHighlightShape(value: self.backgroundValue)
-                    .fill(Color.accentColor)
-            )
-            .padding(8)
-            .background(Color.backgroundSecondary)
-            .clipShape(RoundedRectangle(cornerRadius: geometry.size.height/2))
+        
+        let backgroundView = GeometryReader { geometry in
+            Color.backgroundSecondary
+                .clipShape(RoundedRectangle(cornerRadius: geometry.size.height/2))
         }
+        
+        return HStack (alignment: .center, spacing: 0) {
+            Group {
+                IconView(name: left)
+                    .foregroundColor(self.value ? .secondary : .primary)
+                    .scaleEffect(self.value ? 0.8 : 1.0)
+                IconView(name: right)
+                    .foregroundColor(self.value ? .primary : .secondary)
+                    .scaleEffect(self.value ? 1.0 : 0.8)
+            }
+            .font(.title)
+            .padding(8)
+        }
+        .background (
+            ToggleViewHighlightShape(value: self.backgroundValue)
+                .fill(Color.accentColor)
+        )
+        .padding(8)
+        .background(backgroundView)
         .onTapGesture {
             withAnimation() {
                 self.value.toggle()

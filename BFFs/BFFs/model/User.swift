@@ -24,7 +24,11 @@ struct ResponseInfo: Codable {
     let version: String?
 }
 
-struct User: Codable {
+struct User: Codable, Identifiable {
+    var id: String {
+        return self.email ?? ""
+    }
+    
     let gender: Gender?
     let name: UserName?
     let location: Location?
